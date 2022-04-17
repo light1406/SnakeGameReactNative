@@ -5,7 +5,9 @@ import {View,
         StyleSheet,
         TouchableOpacity,
         BackHandler,
-        Alert} from 'react-native';
+        Alert,
+        TouchableWithoutFeedback,
+        Keyboard} from 'react-native';
 
 export default class Home extends Component{
     constructor(props){
@@ -30,24 +32,26 @@ export default class Home extends Component{
         }
 
         return (
-            <View style= {styles.container}>
-                <View style= {styles.titleView}>
-                    <Text style={styles.titleText}>Snake</Text>
+            <TouchableWithoutFeedback onPress={()=> Keyboard.dismiss()}>
+                <View style= {styles.container}>
+                    <View style= {styles.titleView}>
+                        <Text style={styles.titleText}>Snake</Text>
+                    </View>
+                    <View style= {styles.btns}>
+                        <TextInput 
+                            style= {styles.input}
+                            placeholder='Enter your name'
+                            onChangeText ={this.handlePlayer}
+                        />
+                        <TouchableOpacity style= {styles.btn} onPress={startGame}>
+                            <Text style={styles.btnText}>START</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style= {styles.btn} onPress={() => BackHandler.exitApp()}>
+                            <Text style={styles.btnText}>QUIT</Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
-                <View style= {styles.btns}>
-                    <TextInput 
-                        style= {styles.input}
-                        placeholder='Enter your name'
-                        onChangeText ={this.handlePlayer}
-                    />
-                    <TouchableOpacity style= {styles.btn} onPress={startGame}>
-                        <Text style={styles.btnText}>START</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style= {styles.btn} onPress={() => BackHandler.exitApp()}>
-                        <Text style={styles.btnText}>QUIT</Text>
-                    </TouchableOpacity>
-                </View>
-            </View>
+            </TouchableWithoutFeedback>
         )
     }
 
